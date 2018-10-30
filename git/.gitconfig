@@ -1,0 +1,13 @@
+[user]
+	email = markopaolini@gmail.com
+	name = Marco Paolini
+	signingkey = 508E5352E11DCD5C
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	gpgsign = 0
+[alias]
+	quick-stats = ! /usr/local/bin/git-quick-stats

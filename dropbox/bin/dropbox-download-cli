@@ -1,0 +1,4 @@
+#!/bin/bash
+DBOX_CLI=~/bin/dropbox.py
+[ -f "$DBOX_CLI" ] || ( echo "downloading $DBOX_CLI" && curl -s https://www.dropbox.com/download?dl=packages/dropbox.py -o "$DBOX_CLI" )
+chmod +x "$DBOX_CLI"

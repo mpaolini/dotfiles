@@ -1,0 +1,3 @@
+#!/bin/bash
+dropbox.py exclude add Photos
+dropbox.py exclude add Camera\ Uploads

@@ -1,0 +1,10 @@
+#!/bin/bash
+set -a
+SRC=`mktemp -d`
+cd $SRC
+git clone -q https://github.com/Anthony25/gnome-terminal-colors-solarized.git .
+./install.sh -s light -p light --skip-dircolors
+./install.sh -s dark -p dark --skip-dircolors
+cp set_*.sh ~/bin/
+cd - > /dev/null
+rm -rf $SRC
