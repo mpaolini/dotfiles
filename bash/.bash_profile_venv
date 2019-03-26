@@ -1,0 +1,3 @@
+export X_AUTOACTIVATE_VENV="1"
+
+[ -f ~/.bash_profile ] && . ~/.bash_profile
