@@ -1,0 +1,5 @@
+export X_AUTOACTIVATE_VENV="1"
+
+[ -f ~/.bashrc ] && . ~/.bashrc
+
+unset X_AUTOACTIVATE_VENV
