@@ -75,7 +75,8 @@
  '(pos-tip-foreground-color "#93a1a1")
  '(safe-local-variable-values
    (quote
-    ((flycheck-clang-include-path delete-dups
+    ((js-indent-level . 2)
+     (flycheck-clang-include-path delete-dups
 				  (quote
 				   ("X")))
      (flycheck-clang-include-path delete-dups
@@ -97,8 +98,7 @@
      (eval setq flycheck-clang-include-path
 	   (list
 	    (expand-file-name "./include/")))
-     (column-number-mode . 120)
-     (js-indent-level . 2))))
+     (column-number-mode . 120))))
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
@@ -180,6 +180,13 @@
   :init (global-flycheck-mode)
   :config
   (setq flycheck-clang-include-path '("/usr/include/python3.6m")))
+
+;; js
+(defun my-js-mode-hook ()
+  "Custom `js-mode' behaviours."
+  (setq indent-tabs-mode nil)
+  (setq js-indent-level 2))
+(add-hook 'js-mode-hook 'my-js-mode-hook)
 
 (use-package projectile
   :ensure t
