@@ -187,6 +187,21 @@
   (setq indent-tabs-mode nil)
   (setq js-indent-level 2))
 (add-hook 'js-mode-hook 'my-js-mode-hook)
+(use-package js2-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-hook 'js2-mode-hook 'my-js-mode-hook))
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-formater-before-save)))
+
+(use-package xref-js2
+  :ensure t
+  :after (js2-mode))
 
 (use-package projectile
   :ensure t
