@@ -165,20 +165,24 @@
   :config
   (elpy-enable)
   (setq python-shell-interpreter "ipython"
-	python-shell-interpreter-args "-i --simple-prompt --no-banner")
+  	python-shell-interpreter-args "-i --simple-prompt --no-banner")
   (setq elpy-test-runner (quote elpy-test-pytest-runner))
   ;; (setq python-shell-interpreter "jupyter"
   ;; 	python-shell-interpreter-args "console --simple-prompt"
   ;; 	python-shell-prompt-detect-failure-warning nil)
   (add-to-list 'python-shell-completion-native-disabled-interpreters
             "jupyter")
-  (add-hook 'elpy-mode-hook (lambda () (local-set-key (kbd "<f5>") "import pdb; pdb.set_trace()")))
- )
+  (add-hook 'elpy-mode-hook (lambda () (local-set-key (kbd "<f5>") "import pdb; pdb.set_trace()"))))
 
 (use-package flycheck
   :ensure t
+  :after (elpy)
   :init (global-flycheck-mode)
   :config
+  ;; use flycheck instead of flymake in elpy
+  (when (load "flycheck" t t)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+    (add-hook 'elpy-mode-hook 'flycheck-mode))
   (setq flycheck-clang-include-path '("/usr/include/python3.6m")))
 
 ;; js
