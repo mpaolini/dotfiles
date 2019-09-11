@@ -130,6 +130,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+export PATH="~/bin:$PATH"
+
 if [ "$X_AUTOACTIVATE_VENV" = "1" -a -f ./virtual/bin/activate ]; then
     . ./virtual/bin/activate
 fi
