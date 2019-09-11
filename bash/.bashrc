@@ -135,3 +135,6 @@ export PATH="~/bin:$PATH"
 if [ "$X_AUTOACTIVATE_VENV" = "1" -a -f ./virtual/bin/activate ]; then
     . ./virtual/bin/activate
 fi
+
+export GPG_TTY=$(tty)
+
