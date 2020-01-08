@@ -1,7 +1,7 @@
 [user]
-	email = markopaolini@gmail.com
+	email = mpaolini@users.noreply.github.com
 	name = Marco Paolini
-	signingkey = 508E5352E11DCD5C
+	signingkey = CF66ACE507DF1172735D5D32A579E99203539FA9
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

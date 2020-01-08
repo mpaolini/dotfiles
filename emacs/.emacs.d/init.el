@@ -34,6 +34,7 @@
  '(custom-safe-themes
    (quote
     ("34ed3e2fa4a1cb2ce7400c7f1a6c8f12931d8021435bad841fdc1192bd1cc7da" "cd4d1a0656fee24dc062b997f54d6f9b7da8f6dc8053ac858f15820f9a04a679" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "7d2e7a9a7944fbde74be3e133fc607f59fdbbab798d13bd7a05e38d35ce0db8d" "c856158cc996d52e2f48190b02f6b6f26b7a9abd5fea0c6ffca6740a1003b333" "ef98b560dcbd6af86fbe7fd15d56454f3e6046a3a0abd25314cfaaefd3744a9e" "a5956ec25b719bf325e847864e16578c61d8af3e8a3d95f60f9040d02497e408" "f27c3fcfb19bf38892bc6e72d0046af7a1ded81f54435f9d4d09b3bff9c52fc1" "62c81ae32320ceff5228edceeaa6895c029cc8f43c8c98a023f91b5b339d633f" "fec45178b55ad0258c5f68f61c9c8fd1a47d73b08fb7a51c15558d42c376083d" "6271fc9740379f8e2722f1510d481c1df1fcc43e48fa6641a5c19e954c21cc8f" "6daa09c8c2c68de3ff1b83694115231faa7e650fdbb668bc76275f0f2ce2a437" "8543b328ed10bc7c16a8a35c523699befac0de00753824d7e90148bca583f986" "78c1c89192e172436dbf892bd90562bc89e2cc3811b5f9506226e735a953a9c6" "c968804189e0fc963c641f5c9ad64bca431d41af2fb7e1d01a2a6666376f819c" "cc71cf67745d023dd2e81f69172888e5e9298a80a2684cbf6d340973dd0e9b75" "25c06a000382b6239999582dfa2b81cc0649f3897b394a75ad5a670329600b45" "0c3b1358ea01895e56d1c0193f72559449462e5952bded28c81a8e09b53f103f" "25c242b3c808f38b0389879b9cba325fb1fa81a0a5e61ac7cae8da9a32e2811b" "ef04dd1e33f7cbd5aa3187981b18652b8d5ac9e680997b45dc5d00443e6a46e3" "760ce657e710a77bcf6df51d97e51aae2ee7db1fba21bbad07aab0fa0f42f834" "b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" "527df6ab42b54d2e5f4eec8b091bd79b2fa9a1da38f5addd297d1c91aa19b616" "dad1453029a183e5837ebfd7de65f74df7e06554e39468c758c8197bfa749fec" "9c4acf7b5801f25501f0db26ac3eee3dc263ed51afd01f9dcfda706a15234733" "5f27195e3f4b85ac50c1e2fac080f0dd6535440891c54fcfa62cdcefedf56b1b" "84890723510d225c45aaff941a7e201606a48b973f0121cb9bcb0b9399be8cba" "40da996f3246a3e99a2dff2c6b78e65307382f23db161b8316a5440b037eb72c" default)))
+ '(elpy-rpc-virtualenv-path (quote current))
  '(elpy-test-runner (quote elpy-test-pytest-runner))
  '(fci-rule-color "#073642")
  '(flycheck-cppcheck-include-path
@@ -69,7 +70,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (xclip solarized-theme gruvbox-theme dracula-theme base16-theme monokai-theme feature-mode vue-mode vue-html-mode go-mode rust-mode counsel-gtags company-jedi nord-theme yaml-mode markdown-mode use-package flycheck)))
+    (powershell xclip solarized-theme gruvbox-theme dracula-theme base16-theme monokai-theme feature-mode go-mode rust-mode counsel-gtags company-jedi nord-theme yaml-mode markdown-mode use-package flycheck)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -154,7 +155,7 @@
 
 ;; Anaconda mode https://github.com/proofit404/anaconda-mode ???
 
-;; Elpy
+;; Elpy+flycheck
 (use-package company
   :ensure t)
 (use-package company-jedi
@@ -166,12 +167,12 @@
   (elpy-enable)
   (setq python-shell-interpreter "ipython"
   	python-shell-interpreter-args "-i --simple-prompt --no-banner")
-  (setq elpy-test-runner (quote elpy-test-pytest-runner))
+  (setq elpy-test-runner 'elpy-test-pytest-runner)
   ;; (setq python-shell-interpreter "jupyter"
   ;; 	python-shell-interpreter-args "console --simple-prompt"
   ;; 	python-shell-prompt-detect-failure-warning nil)
-  (add-to-list 'python-shell-completion-native-disabled-interpreters
-            "jupyter")
+  ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
+  ;;           "jupyter")
   (add-hook 'elpy-mode-hook (lambda () (local-set-key (kbd "<f5>") "import pdb; pdb.set_trace()"))))
 
 (use-package flycheck
@@ -207,6 +208,14 @@
   :ensure t
   :after (js2-mode))
 
+;; YAML
+
+(use-package yaml-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+
+;; project
 (use-package projectile
   :ensure t
   :after (ivy)
@@ -236,7 +245,7 @@
 (use-package gruvbox-theme
   :ensure t
   :config
-  (load-theme 'gruvbox-dark-medium t))
+  (load-theme 'gruvbox-light-medium t))
 (use-package ivy
   :ensure t)
 (use-package rust-mode
