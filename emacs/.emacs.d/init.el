@@ -34,7 +34,7 @@
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    (quote
-    (powershell xclip solarized-theme gruvbox-theme dracula-theme base16-theme monokai-theme feature-mode go-mode rust-mode counsel-gtags company-jedi nord-theme yaml-mode markdown-mode use-package flycheck)))
+    (dockerfile-mode elpy powershell xclip solarized-theme gruvbox-theme dracula-theme base16-theme monokai-theme feature-mode go-mode rust-mode counsel-gtags company-jedi nord-theme yaml-mode markdown-mode use-package flycheck)))
  '(python-check-command "flake8")
  '(python-indent-def-block-scale 1)
  '(safe-local-variable-values
@@ -110,6 +110,7 @@
   ;; 	python-shell-prompt-detect-failure-warning nil)
   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
   ;;           "jupyter")
+  (add-hook 'elpy-mode-hook (lambda() (define-key elpy-mode-map (kbd "M-.") 'elpy-goto-assignment)))
   (add-hook 'elpy-mode-hook (lambda () (local-set-key (kbd "<f5>") "import pdb; pdb.set_trace()"))))
 
 (use-package flycheck
